@@ -5,3 +5,5 @@ uploads/*
 tmpfiles/*
 .env
 test.js
+
+*.pem
