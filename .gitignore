@@ -1,0 +1,7 @@
+/node_modules
+/config/key.js
+FillFakeData
+uploads/*
+tmpfiles/*
+.env
+test.js
