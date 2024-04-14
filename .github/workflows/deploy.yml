@@ -21,7 +21,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
+      - name: 📂 rsync deployments
+        uses: burnett01/rsync-deployments@5.1
+        env:
+            PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USER  }}
+        with:
+            switches: -avzr --delete
+            path: ./*
+            remote_path: /home/ubuntu/server/
+            remote_host: $HOSTNAME
+            remote_user: $USER_NAME
+            remote_key: "$PRIVATE_KEY"
+
+        # Runs a single command using the runners shell
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
@@ -33,24 +47,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
             #Now we have got the access of EC2 and we will start the deploy .
-            DIR="/home/ubuntu/server"
             pm2 delete all
-            cd /home/ubuntu
-
-            if [ ! -d $DIR ]
-            then
-              mkdir server &&
-              git clone https://github.com/muditbisht/fitness-freak-backend server &&
-              cd server &&
-              yarn install --production
-            else
-              cd server
-            fi
-
-            git checkout main &&
-            git fetch --all &&
-            git reset --hard origin/main &&
-            git pull origin main &&
-            yarn install --production &&
-            pm2 restart server
+            cd /home/ubuntu/server
+            pm2 start src/server.js
           '
