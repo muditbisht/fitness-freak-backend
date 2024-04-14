@@ -3,10 +3,10 @@ const faker = require('faker');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const path = require('path');
-const { User, Ques } = require('../../Models');
+const { User, Ques } = require('../../src/Models');
 const { exit } = require('process');
-const { category } = require('../../config');
-const { postQuestionHandler } = require('../../Handlers/Question');
+const { category } = require('../../src/config');
+const { postQuestionHandler } = require('../../src/Handlers/Question');
 const {
     DATABASE_USER,
     DATABASE_PASSWORD,

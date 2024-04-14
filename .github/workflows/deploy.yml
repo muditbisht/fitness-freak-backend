@@ -51,5 +51,6 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            pm2 start src/server.js
+            yarn install --production &&
+            pm2 restart server
           '
