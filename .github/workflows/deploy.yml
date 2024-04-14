@@ -52,6 +52,7 @@ jobs:
                 git fetch --all &&
                 git reset --hard origin/main &&
                 git pull origin main &&
+                sudo nvm use &&
                 sudo npm ci &&
                 sudo pm2 stop ./src/server.js &&
                 sudo pm2 stop ./src/server.js
