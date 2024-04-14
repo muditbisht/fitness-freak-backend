@@ -1,4 +1,4 @@
 module.exports = {
-    CLIENT_DOMAIN: 'https://fitnessfreak-8d7d7b2e193e.herokuapp.com',
-    API_DOMAIN: 'https://fitnessfreak-8d7d7b2e193e.herokuapp.com/api',
+    CLIENT_DOMAIN: 'https://fitness-freak.muditsinghbisht.in',
+    API_DOMAIN: 'https://api.fitness-freak.muditsinghbisht.in/api',
 }
