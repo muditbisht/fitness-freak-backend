@@ -52,5 +52,5 @@ jobs:
                 git fetch --all &&
                 git reset --hard origin/main &&
                 git pull origin main
-                chmod +x scripts/run_command.sh
+                chmod +x /home/ubuntu/server/scripts/run_command.sh
                 scripts/run_command.sh'
