@@ -21,20 +21,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-    #   - name: 📂 rsync deployments
-    #     uses: burnett01/rsync-deployments@5.1
-    #     env:
-    #         PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
-    #         HOSTNAME : ${{ secrets.HOSTNAME  }}
-    #         USER_NAME : ${{ secrets.USER  }}
-    #     with:
-    #         switches: -avzr --delete
-    #         path: ./*
-    #         remote_path: /home/ubuntu/server/
-    #         remote_host: $HOSTNAME
-    #         remote_user: $USER_NAME
-    #         remote_key: "$PRIVATE_KEY"
-
         # Runs a single command using the runners shell
       - name: Deploy in EC2
         env:
@@ -53,6 +39,8 @@ jobs:
                 git reset --hard origin/main &&
                 git pull origin main
                 export NODE_ENV=production
-                npm ci
+                export NVM_DIR=~/.nvm
+                source ~/.nvm/nvm.sh
                 pm2 stop ./src/server.js &&
+                npm ci
                 pm2 start ./src/server.js'
